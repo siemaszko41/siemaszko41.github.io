@@ -43,24 +43,19 @@ upload.addEventListener('click', () => {
     upload.classList.remove("error_shown")
 });
 
-imageInput.addEventListener('change', (event) => {
+imageInput.addEventListener("change", () => {
+    upload.classList.remove("error_shown");
+    upload.classList.add("upload_loaded");
+    upload.classList.remove("upload_loading");
 
-    upload.classList.remove("upload_loaded");
-    upload.classList.add("upload_loading");
+    let file = imageInput.files[0];
+    if (file) {
+        let url = URL.createObjectURL(file); // <-- zamiast fetch
+        upload.setAttribute("selected", url);
+        upload.querySelector(".upload_uploaded").src = url;
+    }
+});
 
-    upload.removeAttribute("selected")
-
-    var file = imageInput.files[0];
-    var data = new FormData();
-    data.append("image", file);
-
-    fetch("https://api.imgur.com/3/image", {
-    method: "POST",
-    headers: {
-        "Authorization": "Client-ID ec67bcef2e19c08"
-    },
-    body: data
-})
     .then(result => result.json())
     .then(response => {
         
@@ -153,4 +148,5 @@ guide.addEventListener('click', () => {
     }
 
 })
+
 
