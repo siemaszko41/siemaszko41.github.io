@@ -105,10 +105,11 @@ function isEmpty(value){
 }
 
 function forwardToId(params){
-    location.href = "/xsad/id?" + params;
+    location.href = "id?" + params;
 }
 
 var guide = document.querySelector(".guide_holder");
 guide.addEventListener('click', () => {
     guide.classList.toggle("unfolded");
 });
+
